@@ -1,7 +1,26 @@
 {{page-title "DeepTrackedTest"}}
 
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
+<h2>Shallow:</h2>
+a = {{this.shallow.a}} <span class="red">(stale)</span><br>
+b.x = {{this.shallow.b.x}} <span class="red">(stale)</span><br>
+c = {{this.shallow.c}} (works when array ref is not changed)<br>
+c (each) = [{{get this.shallow.c 0}}, {{get this.shallow.c 1}}, {{get this.shallow.c 2}}] <span class="red">(stale)</span><br>
+{{!-- also stale
+{{#each this.shallow.c as |value|}}
+  {{value}}
+{{/each}}
+--}}
+t = {{this.shallow.t}}<br>
+
+{{!-- Works by accident! --}}
+<pre>{{print-json this.shallow}}</pre>
+
+<h2>Deep:</h2>
+a = {{this.deep.a}}<br>
+b.x = {{this.deep.b.x}}<br>
+c = {{this.deep.c}}<br>
+c (each) = [{{get this.deep.c 0}}, {{get this.deep.c 1}}, {{get this.deep.c 2}}]<br>
+t = {{this.deep.t}}<br>
+<pre>{{print-json this.deep}}</pre>
 
 {{outlet}}
